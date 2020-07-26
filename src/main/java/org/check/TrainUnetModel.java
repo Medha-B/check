@@ -34,8 +34,8 @@ public class TrainUnetModel {
   private static final Logger log = LoggerFactory.getLogger(TrainUnetModel.class);
   private static final int WIDTH = 128;
   private static final int HEIGHT = 128;
-  //private static final int CHANNELS = 3;
-  private static final int CHANNELS = 1; //for 1 input channel
+  //private static final int CHANNELS = 1;
+  private static final int CHANNELS = 3; //for 1 input channel
   
 
   /**
@@ -74,18 +74,21 @@ public class TrainUnetModel {
   public static void main(String[] args) {
     try {
       int batchSize = 10;
-      String home = System.getProperty("user.home");
+      String directory = System.getProperty("user.dir");
+      System.out.println(directory);
       String pathToImage;
       if (args.length > 0) {
         pathToImage = args[0];
       } else {
-    	  pathToImage = home + File.separator + "Desktop" + File.separator + "Cell images" + File.separator + "F01_202w1_crop17.tif";
+    	  pathToImage = directory + File.separator + "small_dataset" + File.separator + "image1.tif" ;
+    	  System.out.println(pathToImage);
       }
 
       DataNormalization scaler = new ImagePreProcessingScaler(); // scale image between 0 and 1
       UnetPathLabelGenerator labeler = new UnetPathLabelGenerator();
 
-      File rootDir = new File(home + File.separator + "Desktop" + File.separator + "small_dataset");
+      //File rootDir = new File(directory + File.separator + "small_dataset");
+      File rootDir = new File("C:\\Users\\Subroto\\Desktop\\small_dataset");
       String[] allowedExtensions = BaseImageLoader.ALLOWED_FORMATS;
       Random rng = new Random();
       FileSplit inputSplit = new FileSplit(rootDir,allowedExtensions,rng);
@@ -122,6 +125,7 @@ public class TrainUnetModel {
 	    
 	    StatsStorage ss = new InMemoryStatsStorage();
 	    uiServer.attach(ss);
+	    System.out.println("Now fitting");
 	    model.addListeners(new ScoreIterationListener(),new StatsListener(ss));
         model.fit(imageDataSetIterator,numEpochs);
 
@@ -154,7 +158,7 @@ public class TrainUnetModel {
             bufferedImage.setRGB(i,j,new Color(gray,gray,gray).getRGB());
           }
         }
-        ImageIO.write(bufferedImage,"png",new File(home + File.separator + "Desktop" + File.separator + "outputUnet.png"));
+        //ImageIO.write(bufferedImage,"png",new File(home + File.separator + "Desktop" + File.separator + "outputUnet.png"));
        }
     } catch (Exception e) {
       System.err.println("Oooooops");
