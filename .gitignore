@@ -345,5 +345,8 @@ $RECYCLE.BIN/
 #Dataset
 small_dataset/
 
+#gitkeep type
+dataset2
+
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,emacs,vim,eclipse,jetbrains+all,netbeans,java,maven
