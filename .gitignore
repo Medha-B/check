@@ -342,5 +342,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#Dataset
+small_dataset/
+
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,emacs,vim,eclipse,jetbrains+all,netbeans,java,maven
