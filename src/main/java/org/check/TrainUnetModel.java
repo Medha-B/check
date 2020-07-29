@@ -87,8 +87,8 @@ public class TrainUnetModel {
       DataNormalization scaler = new ImagePreProcessingScaler(); // scale image between 0 and 1
       UnetPathLabelGenerator labeler = new UnetPathLabelGenerator();
 
-      //File rootDir = new File(directory + File.separator + "small_dataset");
-      File rootDir = new File("C:\\Users\\Subroto\\Desktop\\small_dataset");
+      File rootDir = new File(directory + File.separator + "small_dataset");
+      //File rootDir = new File("C:\\Users\\Subroto\\Desktop\\small_dataset");
       String[] allowedExtensions = BaseImageLoader.ALLOWED_FORMATS;
       Random rng = new Random();
       FileSplit inputSplit = new FileSplit(rootDir,allowedExtensions,rng);
